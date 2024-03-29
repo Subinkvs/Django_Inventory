@@ -4,3 +4,5 @@ from .models import *
 # Register your models here.
 
 admin.site.register(Products)
+admin.site.register(Variant)
+admin.site.register(SubVariant)

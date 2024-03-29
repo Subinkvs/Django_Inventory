@@ -25,3 +25,20 @@ class Products(models.Model):
         verbose_name_plural = _("products")
         unique_together = (("ProductCode", "ProductID"),)
         ordering = ("-CreatedDate", "ProductID")
+        
+        
+class Variant(models.Model):
+    product = models.ForeignKey(Products, related_name='variants',on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    
+    def __str__(self):
+        return f"{self.product.ProductName} - {self.name}"
+
+    
+class SubVariant(models.Model):
+    variant = models.ForeignKey(Variant, related_name='options', on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    
+    def __str__(self):
+        return f"{self.product.ProductName} - {self.variant.name} - {self.name}"
+    
